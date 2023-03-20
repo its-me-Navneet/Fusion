@@ -5,7 +5,7 @@ from django.shortcuts import render, reverse
 
 from django.contrib import messages
 
-from applications.globals.models import HoldsDesignation, Designation
+from applications.globals.models import HoldsDesignation, Designation,ExtraInfo
 
 from .models import Bank, Company, Payments, Paymentscheme, Receipts
 
@@ -149,9 +149,10 @@ def previewing(request):
             income = int(pay) + int(gr_pay) + int(da) + int(ta) + \
                 int(hra) + int(fpa) + int(special_allow)
             net_payment = (income - gr_reduction)
-
+            userid = request.POST.get("userid")
+            
             a = Paymentscheme(month=month, year=year, pf=pf, name=name, designation=designation, pay=pay, gr_pay=gr_pay, da=da, ta=ta, hra=hra, fpa=fpa, special_allow=special_allow, nps=nps, gpf=gpf,
-                              income_tax=income_tax, p_tax=p_tax, gslis=gslis, gis=gis, license_fee=license_fee, electricity_charges=electricity_charges, others=others, gr_reduction=gr_reduction, net_payment=net_payment)
+                              income_tax=income_tax, p_tax=p_tax, gslis=gslis, gis=gis, license_fee=license_fee, electricity_charges=electricity_charges, others=others, gr_reduction=gr_reduction, net_payment=net_payment,userId = userid)
             a.save()
             context = {
             }
@@ -854,14 +855,15 @@ def printSalary(request):
       Basic details of an employee's salary including basic pay, ta, da, hra, nps etc.
 
     """
-
+    user=request.user
     k = HoldsDesignation.objects.select_related().filter(
         working=request.user, designation=Designation.objects.get(name='adminstrator'))
 
     month = request.POST.get("month")
     year = request.POST.get("year")
-    runpayroll=True
-    c = Paymentscheme.objects.filter(month=month, year=year, runpayroll=runpayroll)
+    runpayroll=True 
+    userid =user.extrainfo.user.email 
+    c = Paymentscheme.objects.filter(month=month, year=year, userId=userid,runpayroll=runpayroll)
     context = {
         'c': c,
     }
