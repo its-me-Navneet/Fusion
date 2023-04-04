@@ -91,7 +91,7 @@ def main_page(request):
 		mini_year = min_date_exp['date_added__min'].year
 		maxi_year = max_date_exp['date_added__max'].year
 
-		if min_date_exp['date_added__min'].month < 4:
+		if min_date_exp['date_added__min'].month < 4: 
 			mini_year-=1
 		if max_date_exp['date_added__max'].month < 4:
 			maxi_year-=1
