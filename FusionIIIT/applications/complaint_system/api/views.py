@@ -18,7 +18,8 @@ from . import serializers
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def complaint_details_api(request,detailcomp_id1):
-    complaint_detail = StudentComplain.objects.get(id=detailcomp_id1)
+    complaint_detail 
+    Complain.objects.get(id=detailcomp_id1)
     complaint_detail_serialized = serializers.StudentComplainSerializers(instance=complaint_detail).data
     if complaint_detail.worker_id is None:
         worker_detail_serialized = {}

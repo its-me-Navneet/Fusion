@@ -105,8 +105,8 @@ def main_page(request):
 
 	expenditure_history = Expenditure.objects.all().order_by("date_added")
 	expenditure_history = expenditure_history[::-1]
-	expense_history2 = otherExpense.objects.all().order_by("date_added")
-	expense_history2 = expense_history2[::-1]
+	# expense_history2 = otherExpense.objects.all().order_by("date_added")
+	# expense_history2 = expense_history2[::-1]
 	expense_history= otherExpense.objects.filter(userid = request.user)
 	fixed_attributes = FixedAttributes.objects.all()
 
@@ -146,7 +146,7 @@ def main_page(request):
 				{
 					'income_sources':income_sources,
 					'income_history':income_history,
-					'expense_history2':expense_history2,
+					# 'expense_history2':expense_history2,
 					'expenditure_types':expenditure_types,
 					'expenditure_history':expenditure_history,
 					'fin_years':fin_years,
@@ -177,7 +177,7 @@ def main_page(request):
 					{
 						'income_sources':income_sources,
 					'income_history':income_history,
-					'expense_history2':expense_history2,
+					# 'expense_history2':expense_history2,
 					'expenditure_types':expenditure_types,
 					'expenditure_history':expenditure_history,
 					'fin_years':fin_years,
