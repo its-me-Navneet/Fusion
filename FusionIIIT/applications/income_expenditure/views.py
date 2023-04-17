@@ -177,7 +177,7 @@ def main_page(request):
 					{
 						'income_sources':income_sources,
 					'income_history':income_history,
-					# 'expense_history2':expense_history2,
+					'expense_history2':expense_history2,
 					'expenditure_types':expenditure_types,
 					'expenditure_history':expenditure_history,
 					'fin_years':fin_years,
